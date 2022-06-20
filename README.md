@@ -6,7 +6,7 @@
 [![](https://img.shields.io/badge/Java%20Version-17-orange)](/pom.xml)
 [![](https://img.shields.io/badge/Enroll-Now-orange)](https://rieckpil.de/testing-spring-boot-applications-primer/)
 
-`master` branch: [![Build & Test Maven Project (master)](https://github.com/rieckpil/testing-spring-boot-applications-primer/workflows/Build%20&%20Test%20Maven%20Project/badge.svg)](https://github.com/rieckpil/testing-spring-boot-applications-primer/actions/workflows/maven.yml?query=branch%3Amaster)
+`main` branch: [![Build & Test Maven Project (master)](https://github.com/rieckpil/testing-spring-boot-applications-primer/workflows/Build%20&%20Test%20Maven%20Project/badge.svg)](https://github.com/rieckpil/testing-spring-boot-applications-primer/actions/workflows/maven.yml?query=branch%3Amain)
 
 > This is the source code for the **Primer** online course, you'll find the source code for the **Masterclass** [here](https://github.com/rieckpil/testing-spring-boot-applications-masterclass).
 
