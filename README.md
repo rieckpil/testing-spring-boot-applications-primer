@@ -49,7 +49,7 @@ OpenJDK Runtime Environment Zulu17.28+13-CA (build 17+35-LTS)
 OpenJDK 64-Bit Server VM Zulu17.28+13-CA (build 17+35-LTS, mixed mode, sharing)
 ```
 
-* Docker Engine (Community Edition is enough) and Docker Compose:
+* Docker Engine (Community Edition is enough):
 
 ```
 $ docker version
@@ -72,12 +72,6 @@ Server: Docker Engine - Community
   Built:            Fri Apr  9 22:45:28 2021
   OS/Arch:          linux/amd64
   Experimental:     false
-
-$ docker-compose version
-docker-compose version 1.26.2, build eefe0d31
-docker-py version: 4.2.2
-CPython version: 3.7.7
-OpenSSL version: OpenSSL 1.1.1g  21 Apr 2020
 ```
 
 Optional requirements:
