@@ -2,7 +2,7 @@
 
 # About the Primer
 
-[![](https://img.shields.io/badge/Spring%20Boot%20Version-2.6.8-orange)](/pom.xml)
+[![](https://img.shields.io/badge/Spring%20Boot%20Version-2.6.3-orange)](/pom.xml)
 [![](https://img.shields.io/badge/Java%20Version-17-orange)](/pom.xml)
 [![](https://img.shields.io/badge/Enroll-Now-orange)](https://rieckpil.de/testing-spring-boot-applications-primer/)
 
