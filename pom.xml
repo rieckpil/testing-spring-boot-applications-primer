@@ -121,7 +121,7 @@
       <!-- Added with Exercise #2 -->
       <plugin>
         <artifactId>maven-failsafe-plugin</artifactId>
-        <version>3.0.0-M5</version>
+        <version>3.0.0-M7</version>
         <executions>
           <execution>
             <goals>
