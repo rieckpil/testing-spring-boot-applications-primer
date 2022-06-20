@@ -23,9 +23,6 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class AdvancedSelenideTest {
 
-  @LocalServerPort
-  private Integer port;
-
   static BrowserWebDriverContainer<?> webDriverContainer =
     new BrowserWebDriverContainer<>()
       .withCapabilities(new ChromeOptions()
@@ -38,6 +35,7 @@ class AdvancedSelenideTest {
     Testcontainers.exposeHostPorts(port);
     webDriverContainer.start();
     Configuration.baseUrl = String.format("http://host.testcontainers.internal:%d", port);
+    Configuration.reportsFolder = "target/selenide-screenshots";
   }
 
   @Test
