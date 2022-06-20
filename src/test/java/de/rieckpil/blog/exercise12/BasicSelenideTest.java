@@ -15,8 +15,10 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.screenshot;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@TestPropertySource(properties = "message=Hello World!")
+@SpringBootTest(
+  webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT,
+  properties = "server.port=8888"
+)
 class BasicSelenideTest {
 
   @BeforeAll
@@ -32,8 +34,7 @@ class BasicSelenideTest {
     Configuration.browserCapabilities = chromeOptions;
     Configuration.reportsFolder = "target/selenide-screenshots";
 
-    Integer port = environment.getProperty("local.server.port", Integer.class);
-    Configuration.baseUrl = "http://localhost:" + port;
+    Configuration.baseUrl = "http://localhost:8888";
   }
 
   @Test
