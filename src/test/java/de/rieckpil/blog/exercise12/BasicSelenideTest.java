@@ -46,6 +46,6 @@ class BasicSelenideTest {
 
     $(By.id("submit")).click();
 
-    screenshot("post-submit");
+    screenshot("basic-selenide-test-post-submit");
   }
 }
