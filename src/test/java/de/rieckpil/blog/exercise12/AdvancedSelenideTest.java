@@ -3,6 +3,7 @@ package de.rieckpil.blog.exercise12;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -35,6 +36,11 @@ class AdvancedSelenideTest {
     webDriverContainer.start();
     Configuration.baseUrl = String.format("http://host.testcontainers.internal:%d", port);
     Configuration.reportsFolder = "target/selenide-screenshots";
+  }
+
+  @AfterAll
+  static void cleanUp() {
+    WebDriverRunner.closeWebDriver();
   }
 
   @Test

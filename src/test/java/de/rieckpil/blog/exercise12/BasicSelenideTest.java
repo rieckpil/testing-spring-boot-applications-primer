@@ -2,8 +2,9 @@ package de.rieckpil.blog.exercise12;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.WebDriverRunner;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -20,6 +21,7 @@ class BasicSelenideTest {
 
   @BeforeAll
   static void configureChromeDriver(@Autowired Environment environment) {
+
     ChromeOptions chromeOptions = new ChromeOptions();
     chromeOptions.addArguments(
       "--no-sandbox",
@@ -33,6 +35,11 @@ class BasicSelenideTest {
 
     Integer port = environment.getProperty("local.server.port", Integer.class);
     Configuration.baseUrl = "http://localhost:" + port;
+  }
+
+  @AfterAll
+  static void cleanUp() {
+    WebDriverRunner.closeWebDriver();
   }
 
   @Test
