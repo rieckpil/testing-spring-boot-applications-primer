@@ -2,8 +2,9 @@ package de.rieckpil.blog.exercise12;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.WebDriverRunner;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -15,12 +16,12 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.screenshot;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@Disabled("Temporary disabled as errors on CI occur")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class BasicSelenideTest {
 
   @BeforeAll
   static void configureChromeDriver(@Autowired Environment environment) {
+
     ChromeOptions chromeOptions = new ChromeOptions();
     chromeOptions.addArguments(
       "--no-sandbox",
@@ -36,6 +37,11 @@ class BasicSelenideTest {
     Configuration.baseUrl = "http://localhost:" + port;
   }
 
+  @AfterAll
+  static void cleanUp() {
+    WebDriverRunner.closeWebDriver();
+  }
+
   @Test
   void shouldAccessDashboardAndSubmitForm() {
     Selenide.open("/dashboard");
@@ -47,6 +53,6 @@ class BasicSelenideTest {
 
     $(By.id("submit")).click();
 
-    screenshot("post-submit");
+    screenshot("basic-selenide-test-post-submit");
   }
 }

@@ -3,6 +3,7 @@ package de.rieckpil.blog.exercise12;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -10,7 +11,6 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.core.env.Environment;
 import org.testcontainers.Testcontainers;
 import org.testcontainers.containers.BrowserWebDriverContainer;
@@ -38,6 +38,11 @@ class AdvancedSelenideTest {
     Configuration.reportsFolder = "target/selenide-screenshots";
   }
 
+  @AfterAll
+  static void cleanUp() {
+    WebDriverRunner.closeWebDriver();
+  }
+
   @Test
    void shouldDisplayBook() {
     RemoteWebDriver remoteWebDriver = webDriverContainer.getWebDriver();
@@ -52,6 +57,6 @@ class AdvancedSelenideTest {
 
     $(By.id("submit")).click();
 
-    screenshot("post-submit");
+    screenshot("advanced-selenide-test-post-submit");
   }
 }
