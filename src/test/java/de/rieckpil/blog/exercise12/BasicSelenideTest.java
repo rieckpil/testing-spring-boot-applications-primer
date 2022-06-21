@@ -15,7 +15,6 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.screenshot;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@Disabled("Temporary disabled as errors on CI occur")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class BasicSelenideTest {
 
