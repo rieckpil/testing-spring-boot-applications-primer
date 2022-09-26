@@ -19,7 +19,7 @@
     <java.version>17</java.version>
     <testcontainers.version>1.17.3</testcontainers.version>
     <selenium.version>4.2.2</selenium.version>
-    <selenide.version>6.7.4</selenide.version>
+    <selenide.version>6.8.0</selenide.version>
   </properties>
 
   <dependencyManagement>
