@@ -3,6 +3,7 @@ package de.rieckpil.blog.exercise7;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
+import de.rieckpil.blog.WebSecurityConfig;
 import de.rieckpil.blog.customer.Customer;
 import de.rieckpil.blog.customer.CustomerController;
 import de.rieckpil.blog.customer.CustomerService;
@@ -11,6 +12,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -18,6 +20,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+// Required to manually import the security config since Spring Boot 2.7.0 when using a SecurityFilterChain bean
+@Import(WebSecurityConfig.class)
 @WebMvcTest(CustomerController.class)
 class AdvancedCustomerControllerTest {
 
