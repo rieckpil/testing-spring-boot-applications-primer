@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.7.0</version>
+    <version>3.0.2</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
@@ -17,9 +17,10 @@
 
   <properties>
     <java.version>17</java.version>
-    <testcontainers.version>1.17.3</testcontainers.version>
-    <selenium.version>4.2.2</selenium.version>
-    <selenide.version>6.7.4</selenide.version>
+    <testcontainers.version>1.17.6</testcontainers.version>
+    <selenium.version>4.7.2</selenium.version>
+    <selenide.version>6.10.3</selenide.version>
+    <httpclient5.version>5.2.1</httpclient5.version>
   </properties>
 
   <dependencyManagement>
