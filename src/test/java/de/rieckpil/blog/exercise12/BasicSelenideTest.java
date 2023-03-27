@@ -28,7 +28,8 @@ class BasicSelenideTest {
       "--disable-dev-shm-usage",
       "--headless",
       "--disable-gpu",
-      "--disable-extensions");
+      "--disable-extensions",
+      "--remote-allow-origins=*");
 
     Configuration.browserCapabilities = chromeOptions;
     Configuration.reportsFolder = "target/selenide-screenshots";
