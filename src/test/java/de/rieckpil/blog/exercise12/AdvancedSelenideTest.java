@@ -9,11 +9,17 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.env.Environment;
 import org.testcontainers.Testcontainers;
 import org.testcontainers.containers.BrowserWebDriverContainer;
+import org.testcontainers.containers.output.Slf4jLogConsumer;
+import org.testcontainers.containers.wait.strategy.LogMessageWaitStrategy;
+
+import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.screenshot;
@@ -23,17 +29,27 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class AdvancedSelenideTest {
 
+  private static final Logger LOG = LoggerFactory.getLogger(AdvancedSelenideTest.class);
+
+  private static ChromeOptions chromeOptions;
+
   static BrowserWebDriverContainer<?> webDriverContainer =
     new BrowserWebDriverContainer<>()
-      .withCapabilities(new ChromeOptions()
-        .addArguments("--no-sandbox")
-        .addArguments("--disable-dev-shm-usage"));
+      .withLogConsumer(new Slf4jLogConsumer(LOG))
+      .withCapabilities(chromeOptions);
 
   @BeforeAll
   static void beforeAll(@Autowired Environment environment) {
     Integer port = environment.getProperty("local.server.port", Integer.class);
     Testcontainers.exposeHostPorts(port);
+
+    chromeOptions = new ChromeOptions()
+      .addArguments("--no-sandbox")
+      .addArguments("--disable-dev-shm-usage")
+      .addArguments("--remote-allow-origins=*");
+
     webDriverContainer.start();
+
     Configuration.baseUrl = String.format("http://host.testcontainers.internal:%d", port);
     Configuration.reportsFolder = "target/selenide-screenshots";
   }
@@ -44,8 +60,11 @@ class AdvancedSelenideTest {
   }
 
   @Test
-   void shouldDisplayBook() {
-    RemoteWebDriver remoteWebDriver = webDriverContainer.getWebDriver();
+  void shouldDisplayBook() {
+    RemoteWebDriver remoteWebDriver = new RemoteWebDriver(webDriverContainer.getSeleniumAddress(), chromeOptions, false);
+
+    remoteWebDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
     WebDriverRunner.setWebDriver(remoteWebDriver);
 
     Selenide.open("/dashboard");
