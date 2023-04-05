@@ -31,17 +31,23 @@ class AdvancedSelenideTest {
 
   private static final Logger LOG = LoggerFactory.getLogger(AdvancedSelenideTest.class);
 
+  private static ChromeOptions chromeOptions;
+
   static BrowserWebDriverContainer<?> webDriverContainer =
     new BrowserWebDriverContainer<>()
       .withLogConsumer(new Slf4jLogConsumer(LOG))
-      .withCapabilities(new ChromeOptions());
+      .withCapabilities(chromeOptions);
 
   @BeforeAll
   static void beforeAll(@Autowired Environment environment) {
     Integer port = environment.getProperty("local.server.port", Integer.class);
     Testcontainers.exposeHostPorts(port);
 
-    webDriverContainer.setWaitStrategy(new LogMessageWaitStrategy().withRegEx(".*(from DOWN to UP).*"));
+    chromeOptions = new ChromeOptions()
+      .addArguments("--no-sandbox")
+      .addArguments("--disable-dev-shm-usage")
+      .addArguments("--remote-allow-origins=*");
+
     webDriverContainer.start();
 
     Configuration.baseUrl = String.format("http://host.testcontainers.internal:%d", port);
@@ -55,14 +61,9 @@ class AdvancedSelenideTest {
 
   @Test
   void shouldDisplayBook() {
-    RemoteWebDriver remoteWebDriver = new RemoteWebDriver(webDriverContainer.getSeleniumAddress(), new ChromeOptions()
-      .addArguments("--no-sandbox")
-      .addArguments("--disable-dev-shm-usage"), false);
+    RemoteWebDriver remoteWebDriver = new RemoteWebDriver(webDriverContainer.getSeleniumAddress(), chromeOptions, false);
 
-    remoteWebDriver
-      .manage()
-      .timeouts()
-      .implicitlyWait(Duration.ofSeconds(60));
+    remoteWebDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
     WebDriverRunner.setWebDriver(remoteWebDriver);
 
