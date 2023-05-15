@@ -19,7 +19,7 @@
     <java.version>17</java.version>
     <testcontainers.version>1.18.0</testcontainers.version>
     <selenium.version>4.8.3</selenium.version>
-    <selenide.version>6.13.0</selenide.version>
+    <selenide.version>6.14.1</selenide.version>
     <httpclient5.version>5.2.1</httpclient5.version>
   </properties>
 
