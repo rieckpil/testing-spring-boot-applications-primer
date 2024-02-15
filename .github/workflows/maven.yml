@@ -5,17 +5,17 @@ on:
     - cron: '0 15 * * *' # daily at 3pm
 jobs:
   build-and-test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     name: Build Application
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Setup for JDK 17
+      - name: Setup for JDK 12
         uses: actions/setup-java@v3
         with:
           distribution: temurin
-          java-version: 17
+          java-version: 21
           java-package: jdk
           cache: maven
 
